@@ -140,10 +140,13 @@ const Task = ({ task }: TaskProps) => {
   const formattedStartDate = task.startDate
     ? format(new Date(task.startDate), "P")
     : "";
+
   const formattedDueDate = task.dueDate
     ? format(new Date(task.dueDate), "P")
     : "";
+
   const numberOfComments = (task.comments && task.comments.length) || 0;
+
   const PriorityTag = ({ priority }: { priority: TaskType["priority"] }) => (
     <div
       className={`rounded-full px-2 py-1 text-xs font-semibold ${
@@ -161,6 +164,7 @@ const Task = ({ task }: TaskProps) => {
       {priority}
     </div>
   );
+
   return (
     <div
       ref={(instance) => {
