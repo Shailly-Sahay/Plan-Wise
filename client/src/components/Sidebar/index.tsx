@@ -2,6 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
+import { useGetProjectsQuery } from "@/state/api";
 import {
   LockIcon,
   Icon,
@@ -23,6 +24,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Project } from "@/state/api";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { useState } from "react";
@@ -48,6 +50,7 @@ const Sidebar = () => {
     { icon: Layers3, label: "Backlog", href: "/priority/backlog" },
   ];
 
+  const { data: projects } = useGetProjectsQuery();
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
@@ -117,6 +120,16 @@ const Sidebar = () => {
         </button>
 
         {/* PROJECTS LIST */}
+
+        {showProjects &&
+          projects?.map((project: Project) => (
+            <SidebarLink
+              key={project.id}
+              icon={Briefcase}
+              label={project.name}
+              href={`/projects/${project.id}`}
+            />
+          ))}
 
         {/* PRIORITIES LINKS */}
         <button

@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Project {
   id: number;
@@ -60,7 +60,9 @@ export interface Task {
   attachments?: Attachment[];
 }
 
-const api = createApi({
+console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
+
+export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
   tagTypes: ["Projects", "Tasks"],
@@ -112,11 +114,12 @@ const api = createApi({
   }),
 });
 
-export default api;
+console.log(api.useGetProjectsQuery);
 
 export const {
   useGetProjectsQuery,
   useCreateProjectMutation,
   useGetTasksQuery,
   useCreateTaskMutation,
+  useUpdateTaskStatusMutation,
 } = api;
