@@ -60,7 +60,11 @@ export interface Task {
   attachments?: Attachment[];
 }
 
-console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
+export interface SearchResults {
+  tasks?: Task[];
+  projects?: Project[];
+  users?: User[];
+}
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
@@ -111,10 +115,11 @@ export const api = createApi({
         },
       ],
     }),
+    search: build.query<SearchResults, string>({
+      query: (query) => `search?query=${query}`,
+    }),
   }),
 });
-
-console.log(api.useGetProjectsQuery);
 
 export const {
   useGetProjectsQuery,
@@ -122,4 +127,5 @@ export const {
   useGetTasksQuery,
   useCreateTaskMutation,
   useUpdateTaskStatusMutation,
+  useSearchQuery,
 } = api;
