@@ -40,8 +40,6 @@ const Teams = () => {
   if (isLoading) return <div>Loading...</div>;
   if (isError || !teams) return <div>Error fetching teams</div>;
 
-  if (teams) console.log("HEHEHEHEHE", teams);
-
   return (
     <div className="flex w-full flex-col p-8">
       <Header name="Teams" />

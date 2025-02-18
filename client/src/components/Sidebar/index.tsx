@@ -85,7 +85,7 @@ const Sidebar = () => {
           <Image src="/logo.png" alt="logo" width={40} height={40} />
           <div>
             <h3 className="text-md font-bold tracking-wide dark:text-gray-200">
-              SHAILLY TEAM
+              SHAILLY's TEAM
             </h3>
             <div className="mt-1 flex items-start gap-2">
               <LockIcon className="dark-text-gray-400 mt-[0.1rem] h-3 w-3 text-gray-500" />
@@ -174,8 +174,12 @@ const SidebarLink = ({ href, icon: Icon, label }: SidebarLinksProps) => {
     pathname === href || (pathname === "/" && href === "/dashboard");
   const screenWidth = window.innerWidth;
 
+  const onClick = () => {
+    dispatch(setIsSidebarCollapsed(true));
+  };
+
   return (
-    <Link href={href} className="w-full">
+    <Link href={href} className="w-full" onClick={onClick}>
       <div
         className={`transition-color relative flex cursor-pointer items-center gap-3 hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-700 ${isActive ? "dark:gray-600 bg-gray-100 text-white" : ""} justify-start px-8 py-3`}
       >
